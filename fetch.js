@@ -4,13 +4,14 @@ const loader = document.getElementById("spinner")
 
 //fetch function
 function getCountries() {
-    showSpinner(true);
+    showSpinner(false);
     fetch("http://127.0.0.1:3000/countries")
         .then((data) => {
             return data.json();
         })
         .then((json) => {
-            showSpinner(false)
+            showSpinner(true)
+            console.log(json)
             json.countries.forEach((item) => {
                 addCountry(item.name, item.code);
             })
@@ -25,14 +26,14 @@ function addCountry(name, code) {
     var option = document.createElement("option");
     option.text = name;
     option.value = code;
-    entry.appendChild(option,0);
+    entry.appendChild(option, 0);
 }
 //spinner to show/hide
 function showSpinner(isLoading) {
     if (isLoading == true) {
-        loader.style.visibility = "visible";
+        loader.style.display = "block";
     } else {
-        loader.style.visibility = "hidden";
+        loader.style.display = "none";
     }
 }
 
